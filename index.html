@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Random Number Generator</title>
+  </head>
+  <body>
+    Min <input type="number" id = "min"> <br>
+    Max <input type="number" id = "max"> <br>
+    <button id = "random">Random</button>
+    <h2 id = "selectednumber"></h2>
+    History : <div id = "history"></div>
+
+    <script type="text/javascript">
+      document.getElementById('random').onclick = function(){
+        var min = Math.ceil(document.getElementById('min').value);
+        var max = Math.floor(document.getElementById('max').value);
+
+        random(min, max);
+      };
+
+      const history = [];
+      function random(min, max){
+        var randomnumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        if(history.includes(randomnumber)){
+          random(min, max);
+        }
+        else{
+          document.getElementById("selectednumber").innerHTML = randomnumber;
+          history.push(randomnumber);
+
+          document.getElementById("history").innerHTML = "";
+          for (var i = 0; i < history.length; i++) {
+             document.getElementById("history").innerHTML += history[i] + "<br>";
+           }
+        }
+      }
+    </script>
+  </body>
+</html>
